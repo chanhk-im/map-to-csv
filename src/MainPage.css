@@ -1,0 +1,82 @@
+#root {
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header-text {
+  font-weight: 700;
+  font-size: 2.5em;
+}
+
+.container {
+  width: auto;
+  padding: 20px 40px;
+  margin: 30px;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-container);
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.card {
+  padding: 20px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.card-title {
+  font-weight: 700;
+}
+
+.map {
+  width: auto;
+  height: 640px;
+  margin-bottom: 20px;
+}
+
+.info-window {
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-bottom: 45px;
+}
+
+.info-text {
+  font-size: 1.2em;
+  color: #888;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.2em;
+}
+
+.add-button {
+  padding: 5px 10px;
+  margin: 0 4px;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.cancle-button {
+  padding: 5px 10px;
+  margin: 0 4px;
+  background-color: #ce4131;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.address-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+}
