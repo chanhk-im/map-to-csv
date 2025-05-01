@@ -73,10 +73,3 @@
   border: none;
   border-radius: 5px;
 }
-
-.address-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 5px;
-}
