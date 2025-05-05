@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./MainPage.css";
 import excelDownload from "./ExcelUtil";
 import Header from "./Header";
@@ -7,14 +7,45 @@ import Card from "react-bootstrap/Card";
 import AddressTable from "./AddressTable";
 import useKakaoMap from "./useKakaoMap";
 import React from "react";
-import { Address } from "./models/Address";
 import { useAddressStore } from "./stores/AddressStore";
+import { useDrawingManagerStore } from "./stores/DrawingManagerStore";
+import { selectOverlay, cancelDrawing } from "./DrawingTools";
+import { useMapStore } from "./stores/MapStore";
+import { useIsDrawingStore } from "./stores/SystemStore";
 
 function MainPage() {
   const mapRef = useRef<HTMLDivElement>(null);
   const { addressList } = useAddressStore();
+  const { drawingManager } = useDrawingManagerStore();
+  const { isDrawing, setIsDrawing } = useIsDrawingStore();
 
   useKakaoMap(mapRef as React.RefObject<HTMLDivElement>);
+
+  function DrawButton() {
+    if (!isDrawing) {
+      return (
+        <Button
+          variant="primary"
+          onClick={() => {
+            setIsDrawing(true);
+          }}
+        >
+          선 그리기
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          variant="primary"
+          onClick={() => {
+            setIsDrawing(false);
+          }}
+        >
+          취소
+        </Button>
+      );
+    }
+  }
 
   return (
     <>
@@ -25,6 +56,7 @@ function MainPage() {
           <div>좌표 찍어서 목록 확인한 다음 다운받으시면 됩니다.</div>
         </Card>
         <div ref={mapRef} className="map"></div>
+        <DrawButton />
         <Card className="card">
           <AddressTable />
         </Card>
