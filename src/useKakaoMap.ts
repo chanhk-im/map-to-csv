@@ -33,8 +33,9 @@ const useKakaoMap = (mapRef: React.RefObject<HTMLDivElement>) => {
     }
 
     const script = document.createElement("script");
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=9ddfb885a3d518940c70b240b52bfefc&libraries=services,drawing&autoload=false";
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${
+      import.meta.env.VITE_KAKAO_MAP_API_KEY
+    }&libraries=services,drawing&autoload=false`;
     script.async = true;
     script.onload = () => {
       window.kakao.maps.load(initializeMap);
