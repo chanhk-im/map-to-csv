@@ -12,12 +12,13 @@ import { useDrawingManagerStore } from "./stores/DrawingManagerStore";
 import { selectOverlay, cancelDrawing } from "./DrawingTools";
 import { useMapStore } from "./stores/MapStore";
 import { useIsDrawingStore } from "./stores/SystemStore";
+import SearchBar from "./SearchBar";
 
 function MainPage() {
   const mapRef = useRef<HTMLDivElement>(null);
   const { addressList } = useAddressStore();
-  const { drawingManager } = useDrawingManagerStore();
   const { isDrawing, setIsDrawing } = useIsDrawingStore();
+  const { drawingManager } = useDrawingManagerStore();
 
   useKakaoMap(mapRef as React.RefObject<HTMLDivElement>);
 
@@ -27,7 +28,10 @@ function MainPage() {
         <Button
           variant="primary"
           onClick={() => {
-            setIsDrawing(true);
+            if (drawingManager) {
+              setIsDrawing(true);
+              selectOverlay(drawingManager);
+            }
           }}
         >
           선 그리기
@@ -38,7 +42,10 @@ function MainPage() {
         <Button
           variant="primary"
           onClick={() => {
-            setIsDrawing(false);
+            if (drawingManager) {
+              setIsDrawing(false);
+              cancelDrawing(drawingManager);
+            }
           }}
         >
           취소
@@ -55,6 +62,7 @@ function MainPage() {
           <div className="card-title">사용방법</div>
           <div>좌표 찍어서 목록 확인한 다음 다운받으시면 됩니다.</div>
         </Card>
+        <SearchBar />
         <div ref={mapRef} className="map"></div>
         <DrawButton />
         <Card className="card">

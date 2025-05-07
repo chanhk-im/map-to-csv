@@ -6,6 +6,7 @@ interface AddressStore {
   addAddress: (address: Address) => void;
   removeAddress: (index: number) => void;
   clearAddresses: () => void;
+  setAddressList: (addresses: Address[]) => void;
 }
 
 const useAddressStore = create<AddressStore>((set) => ({
@@ -19,6 +20,7 @@ const useAddressStore = create<AddressStore>((set) => ({
       addressList: state.addressList.filter((_, i) => i !== index),
     })),
   clearAddresses: () => set({ addressList: [] }),
+  setAddressList: (addresses: Address[]) => set({ addressList: addresses }),
 }));
 
 export { useAddressStore };
