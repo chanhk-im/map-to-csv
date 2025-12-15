@@ -4,3 +4,17 @@
   align-items: center;
   padding: 0 5px;
 }
+
+.address-item input {
+  width: 500px;
+}
+
+.button-group {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.button-group button {
+  padding: 0.25rem 0.5rem;
+}

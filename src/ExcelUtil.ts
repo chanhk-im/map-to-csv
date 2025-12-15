@@ -38,9 +38,9 @@ const excelDownload = (data, filename) => {
     { v: "주소", t: "s", s: headerStyle },
   ];
 
-  const dataRows = data.map((item) => {
+  const dataRows = data.map((item, index) => {
     return [
-      { v: item.index, t: "s", s: dataStyle },
+      { v: index + 1, t: "s", s: dataStyle },
       { v: item.address, t: "s", s: dataStyle },
     ];
   });

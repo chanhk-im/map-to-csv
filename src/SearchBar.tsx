@@ -37,9 +37,27 @@ export default function SearchBar() {
 
         // 주소에서 시/도, 구/군, 읍/면/동 이름 추출
         const addressParts = result[0].address_name.split(" ");
-        const cityName = addressParts[0]; // 시/도 이름
-        const districtName = addressParts[1]; // 구/군 이름
-        const neighborhoodName = addressParts[2]; // 읍/면/동 이름 (있는 경우)
+        let districtName = "";
+        let neighborhoodName = "";
+        addressParts.slice(1).forEach((addressPart: string) => {
+          if (
+            addressPart.endsWith("시") ||
+            addressPart.endsWith("구") ||
+            addressPart.endsWith("군")
+          ) {
+            console.log(addressPart);
+            districtName += addressPart;
+          } else if (
+            addressPart.endsWith("읍") ||
+            addressPart.endsWith("면") ||
+            addressPart.endsWith("동")
+          ) {
+            console.log(addressPart);
+            neighborhoodName += addressPart;
+          }
+        });
+
+        const cityName = addressParts[0];
 
         console.log(
           `시/도: ${cityName}, 구/군: ${districtName}, 읍/면/동: ${

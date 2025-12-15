@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { convertedCityName } from "../options/convertedCityName";
 
 interface MapStore {
   map: any | null;
@@ -46,13 +47,20 @@ export const useMapStore = create<MapStore>((set, get) => ({
       // 읍/면/동이 있는 경우
       if (neighborhoodName && addName) {
         return (
-          addName.includes(cityName) &&
+          (addName.includes(cityName) ||
+            (convertedCityName.get(cityName) &&
+              addName.includes(convertedCityName.get(cityName)))) &&
           addName.includes(districtName) &&
           addName.includes(neighborhoodName)
         );
       }
       // 시/도와 구/군만 있는 경우
-      return addName.includes(cityName) && addName.includes(districtName);
+      return (
+        (addName.includes(cityName) ||
+          (convertedCityName.get(cityName) &&
+            addName.includes(convertedCityName.get(cityName)))) &&
+        addName.includes(districtName)
+      );
     });
 
     if (!feature) {
@@ -62,12 +70,9 @@ export const useMapStore = create<MapStore>((set, get) => ({
 
     // 경계선 좌표 배열 생성
     const coordinates = feature.geometry.coordinates[0][0];
-    console.log(coordinates);
     const path = coordinates.map((coord: number[]) => {
-      console.log(coord[1]);
       return new window.kakao.maps.LatLng(coord[1], coord[0]);
     });
-    console.log(path);
 
     // 경계선 스타일 설정
     const polyline = new window.kakao.maps.Polyline({

@@ -1,6 +1,6 @@
 import { useIsDrawingStore } from "./stores/SystemStore";
 
-export const selectOverlay = (drawingManager: any) => {
+export const selectDrawing = (drawingManager: any) => {
   console.log("selectOverlay called with:", drawingManager);
 
   if (!drawingManager) {

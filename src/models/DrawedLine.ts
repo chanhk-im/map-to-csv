@@ -1,9 +1,8 @@
 import { Coordinate } from "./Coordinate";
 
 interface DrawedLine {
-  id: number;
-  point1: Coordinate;
-  point2: Coordinate;
+  line: any;
+  gridLines?: any[];
 }
 
 export type { DrawedLine };

@@ -4,7 +4,8 @@ import { DrawedLine } from "../models/DrawedLine";
 interface DrawedLineStore {
   drawedLines: DrawedLine[];
   addDrawedLine: (drawedLine: DrawedLine) => void;
-  removeDrawedLine: (id: number) => void;
+  removeDrawedLine: (index: number) => void;
+  removeLastDrawedLine: () => void;
   clearDrawedLines: () => void;
 }
 
@@ -14,9 +15,13 @@ const useDrawedLineStore = create<DrawedLineStore>((set) => ({
     set((state: { drawedLines: DrawedLine[] }) => ({
       drawedLines: [...state.drawedLines, drawedLine],
     })),
-  removeDrawedLine: (id: number) =>
+  removeDrawedLine: (index: number) =>
     set((state: { drawedLines: DrawedLine[] }) => ({
-      drawedLines: state.drawedLines.filter((line) => line.id !== id),
+      drawedLines: state.drawedLines.filter((line, i) => i !== index),
+    })),
+  removeLastDrawedLine: () =>
+    set((state: { drawedLines: DrawedLine[] }) => ({
+      drawedLines: state.drawedLines.slice(0, -1),
     })),
   clearDrawedLines: () => set({ drawedLines: [] }),
 }));

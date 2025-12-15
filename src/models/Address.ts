@@ -1,8 +1,8 @@
 interface Address {
-    index: number;
-    address: string;
-    lat: number;
-    lng: number;
+  address: string;
+  lat: number;
+  lng: number;
+  marker: any;
 }
 
 export type { Address };
